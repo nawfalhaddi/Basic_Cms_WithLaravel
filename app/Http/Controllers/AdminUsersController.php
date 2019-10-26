@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -125,6 +126,7 @@ class AdminUsersController extends Controller
 
             $name=time().$file->getClientOriginalName();
             $file->move('images',$name);
+            unlink(public_path().$user->photo->file);
 
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
@@ -146,5 +148,10 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+        $user=User::findOrFail($id);
+        unlink(public_path().$user->photo->file);
+        $user->delete();
+        Session::flash('delete_msg',"The user has been deleted successfully");
+        return redirect('/admin/users');
     }
 }

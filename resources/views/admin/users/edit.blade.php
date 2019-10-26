@@ -35,11 +35,35 @@
                 {!! Form::label('password','Password:') !!}
                 {!! Form::password('password',['class'=>'form-control']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::submit('Update user',['class'=>'btn btn-primary']) !!}
+
+            <div class="row">
+                <div class="col-6">
+
+                </div>
             </div>
 
-            {!! Form::close() !!}
+            <div class="row">
+                <div class="col-sm-3 pull-left">
+                    <div class="form-group">
+                        {!! Form::submit('Update user',['class'=>'btn btn-primary']) !!}
+                    </div>
+
+                    {!! Form::close() !!}
+                </div>
+                <div class="col-sm-3 pull-right">
+
+                    {!! Form::model($user,['method'=>'DELETE','action'=>['AdminUsersController@destroy',$user->id],'files'=>true]) !!}
+
+                    <div class="form-group">
+                        {!! Form::submit('Delete user',['class'=>'btn btn-danger']) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
 

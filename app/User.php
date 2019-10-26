@@ -42,4 +42,14 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isActive(){
+
+        if($this->is_active==1){
+
+            return true;
+        }
+
+        return false;
+    }
+
 }
